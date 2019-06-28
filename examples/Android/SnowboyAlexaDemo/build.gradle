@@ -1,22 +1,22 @@
+apply plugin: 'com.android.application'
 buildscript {
     repositories {
         mavenCentral()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'com.android.tools.build:gradle:3.4.0'
     }
 }
-apply plugin: 'android'
 
 dependencies {
-    compile fileTree(include: '*.jar', dir: 'libs')
+    implementation fileTree(include: '*.jar', dir: 'libs')
 }
 
 android {
     signingConfigs {
     }
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
     compileOptions.encoding = 'ISO-8859-1'
     sourceSets {
         main {
@@ -30,7 +30,7 @@ android {
         }
 
         // Move the tests to tests/java, tests/res, etc...
-        instrumentTest.setRoot('tests')
+        androidTest.setRoot('tests')
 
         // Move the build types to build-types/<type>
         // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
@@ -46,7 +46,14 @@ android {
         }
     }
     defaultConfig {
+    minSdkVersion 15
     }
     productFlavors {
+    }
+}
+allprojects {
+    repositories {
+        google() // and here
+        jcenter()
     }
 }
